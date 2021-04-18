@@ -16,6 +16,13 @@ h1{
 
 }
 
+p{
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-family: 'Fredoka One', cursive; 
+    font-size: large;
+}
+
 img{
     width: 30%;
     height: 300px;
@@ -23,8 +30,8 @@ img{
     display: inline-block;
 
 }
- img:hover{
-    box-shadow: 30px 30px 30px 30px rgba(2, 2, 1, 0.178);
+img:hover{
+    box-shadow: 30px 30px 30px 30px rgba(31, 31, 24, 0.178);
 } 
 
 
