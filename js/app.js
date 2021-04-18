@@ -1,5 +1,6 @@
 "use strict";
- 
+
+
 let leftImageElement = document.getElementById('left-image');
 let middleImageElement = document.getElementById('middle-image');
 let rightImageElement = document.getElementById('right-image');
@@ -19,6 +20,7 @@ function Products(name,source){
     Products.allImages.push(this);
   }
 
+  
   Products.allImages =[];
 //console.log(Products.allImages);
 
@@ -43,7 +45,12 @@ new Products('usb', 'img/usb.gif');//[17]
 new Products('water-can', 'img/water-can.jpg');//[18]
 new Products('wine-glass', 'img/wine-glass.jpg');//[19]
 
+function genrateRandomIndex(){
+    return Math.floor(Math.random() * Products.allImages.length); 
+              
+}
 
+//console.log(genrateRandomIndex());
 function render() {
     leftIndex = genrateRandomIndex();
     middleIndex = genrateRandomIndex();  
@@ -111,10 +118,4 @@ function handelClicking(event){
   }
   console.log(Products.allImages);
 
-        function genrateRandomIndex(){
-        return Math.floor(Math.random() * Products.allImages.length); 
-                  
- }
-
-
- //console.log(genrateRandomIndex());
+      
