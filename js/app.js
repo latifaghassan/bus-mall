@@ -14,8 +14,8 @@ let rightIndex;
 function Products(name,source){
     this.name = name;
     this.source = source;
-    this.shownTime = 0;
     this.votes = 0;
+    this.shownTime = 0;
     Products.allImages.push(this);
   }
 

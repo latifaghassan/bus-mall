@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+
+body{
+    background: url(https://png.pngtree.com/thumb_back/fw800/background/20210115/pngtree-star-background-pastel-color-image_525440.jpg)
+}
+
+h1{
+    text-align: center;
+    color: rgb(60, 96, 196);
+    font-family: 'Fredoka One', cursive; ;
+
+}
+
+img{
+    width: 30%;
+    height: 300px;
+    cursor: pointer;
+    display: inline-block;
+
+}
+ img:hover{
+    box-shadow: 30px 30px 30px 30px rgba(2, 2, 1, 0.178);
+} 
+
+
+
