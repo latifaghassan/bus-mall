@@ -80,7 +80,7 @@ leftImageElement.addEventListener('click', handleClicking);
 middleImageElement.addEventListener('click', handleClicking);
 rightImageElement.addEventListener('click', handleClicking);
 
-function handelClicking(event){
+function handleClicking(event){
     counts++;
     if (maxAttempts >= counts) {
 
@@ -106,7 +106,7 @@ function handelClicking(event){
         rightImageElement.removeEventListener('click', handelClicking);
     }
 }
-
+handleClicking();
        
         function renderList(){
         let ul = document.getElementById('lists');
@@ -117,5 +117,4 @@ function handelClicking(event){
      }
   }
   console.log(Products.allImages);
-
-      
+renderList();
