@@ -4,6 +4,7 @@
 let leftImageElement = document.getElementById('left-image');
 let middleImageElement = document.getElementById('middle-image');
 let rightImageElement = document.getElementById('right-image');
+let container = document.getElementById('sec-one');
 
 let counts = 0;
 let maxAttempts = 25;
@@ -45,25 +46,22 @@ new Products('usb', 'img/usb.gif');//[17]
 new Products('water-can', 'img/water-can.jpg');//[18]
 new Products('wine-glass', 'img/wine-glass.jpg');//[19]
 
-function genrateRandomIndex(){
-    return Math.floor(Math.random() * Products.allImages.length); 
-              
-}
+    console.log(Products.allImages);
+  //console.log(genrateRandomIndex());
 
-//console.log(genrateRandomIndex());
-function render() {
+   // for displaying the images
+  function render(){
     leftIndex = genrateRandomIndex();
     middleIndex = genrateRandomIndex();  
     rightIndex = genrateRandomIndex();
 
+     // left === right OR left === middle OR right === middle
+     // avoid repeated ones and make sure they differs.
     while (leftIndex === rightIndex || leftIndex === middleIndex || middleIndex === rightIndex){
-        leftIndex = genrateRandomIndex();
+        rightIndex = genrateRandomIndex();
         middleIndex = genrateRandomIndex();
-        while(rightIndex = genrateRandomIndex){
-            middleIndex = genrateRandomIndex();
+           
         }
-      
-    }
 
     leftImageElement.src = Products.allImages[leftIndex].source;
     Products.allImages[leftIndex].shownTime++;
@@ -76,13 +74,17 @@ function render() {
 render();
 
 
-leftImageElement.addEventListener('click', handleClicking);
-middleImageElement.addEventListener('click', handleClicking);
-rightImageElement.addEventListener('click', handleClicking);
+//leftImageElement.addEventListener('click', handleClicking);
+//middleImageElement.addEventListener('click', handleClicking);
+//rightImageElement.addEventListener('click', handleClicking);
+
+container.addEventListener('click', handleClicking);
 
 function handleClicking(event){
-    counts++;
-    if (maxAttempts >= counts) {
+    // console.log(event.target.id);
+    counts++; 
+    // console.log(counts);
+    if (maxAttempts >= counts){
 
         if(event.target.id === 'left-image'){
             Products.allImages[leftIndex].votes++;
@@ -92,29 +94,45 @@ function handleClicking(event){
 
         }else if(event.target.id === 'right-image'){
             Products.allImages[rightIndex].votes++;
-        } 
+        }else{
+            alert('you should click on the images');
+            counts--;
+        }
         
         render();
-
         console.log(Products.allImages);
 
         }else {
-        renderList()
 
-        leftImageElement.removeEventListener('click', handelClicking);
-        middleImageElement.removeEventListener('click', handelClicking);
-        rightImageElement.removeEventListener('click', handelClicking);
-    }
-}
-handleClicking();
        
-        function renderList(){
+        container.removeEventListener('click', handleClicking);
+
+        //leftImageElement.removeEventListener('click', handelClicking);
+        //middleImageElement.removeEventListener('click', handelClicking);
+        //rightImageElement.removeEventListener('click', handelClicking);
+    }
+}     
+     //  BUTTON
+    let button = document.getElementById('btn');
+    button.addEventListener('click', showingList);
+
+    function showingList(){
+            renderList();
+            button.removeEventListener('click',showingList);
+
+        }
+
+       
+    function renderList(){
         let ul = document.getElementById('lists');
         for(let i = 0 ; i < Products.allImages.length; i++) {
         let li = document.createElement('li');
         ul.appendChild(li);
-        li.textContent = `${Products.allImages[i].name} had ${Products.allImages[i].votes} Votes and was seen for ${Products.allImages[i].shownTime } times`;
+        li.textContent = `${Products.allImages[i].name} had ${Products.allImages[i].votes} Votes and it was seen for ${Products.allImages[i].shownTime } times`;
      }
   }
-  console.log(Products.allImages);
-renderList();
+    function genrateRandomIndex (){
+            return Math.floor(Math.random() * Products.allImages.length);
+        }
+  //console.log(Products.allImages);
+//renderList();
