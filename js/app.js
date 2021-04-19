@@ -10,19 +10,25 @@ let counts = 0;
 let maxAttempts = 25;
 
 let leftIndex;
-let middleIndex;  
+let middleIndex;
 let rightIndex;
+let arrayOfNames = [];
+let arrayOfVotes = [];
 
-function Products(name,source){
+function Products(name, source) {
     this.name = name;
     this.source = source;
     this.votes = 0;
     this.shownTime = 0;
     Products.allImages.push(this);
-  }
+    arrayOfNames.push(this.name);
+    arrayOfVotes.push(this.votes);
+}
 
-  
-  Products.allImages =[];
+//console.log(arrayOfNames);
+//console.log(arrayOfNames);
+
+Products.allImages = [];
 //console.log(Products.allImages);
 
 new Products('bag', 'img/bag.jpg');//[0]
@@ -46,22 +52,22 @@ new Products('usb', 'img/usb.gif');//[17]
 new Products('water-can', 'img/water-can.jpg');//[18]
 new Products('wine-glass', 'img/wine-glass.jpg');//[19]
 
-    console.log(Products.allImages);
-  //console.log(genrateRandomIndex());
+//console.log(Products.allImages);
+//console.log(genrateRandomIndex());
 
-   // for displaying the images
-  function render(){
+// for displaying the images
+function render() {
     leftIndex = genrateRandomIndex();
-    middleIndex = genrateRandomIndex();  
+    middleIndex = genrateRandomIndex();
     rightIndex = genrateRandomIndex();
 
-     // left === right OR left === middle OR right === middle
-     // avoid repeated ones and make sure they differs.
-    while (leftIndex === rightIndex || leftIndex === middleIndex || middleIndex === rightIndex){
+    // left === right OR left === middle OR right === middle
+    // avoid repeated ones and make sure they differs.
+    while (leftIndex === rightIndex || leftIndex === middleIndex || middleIndex === rightIndex) {
         rightIndex = genrateRandomIndex();
         middleIndex = genrateRandomIndex();
-           
-        }
+
+    }
 
     leftImageElement.src = Products.allImages[leftIndex].source;
     Products.allImages[leftIndex].shownTime++;
@@ -80,77 +86,91 @@ render();
 
 container.addEventListener('click', handleClicking);
 
-function handleClicking(event){
+function handleClicking(event) {
     // console.log(event.target.id);
-    counts++; 
+    counts++;
     // console.log(counts);
-    if (maxAttempts >= counts){
+    if (maxAttempts >= counts) {
 
-        if(event.target.id === 'left-image'){
+        if (event.target.id === 'left-image') {
             Products.allImages[leftIndex].votes++;
 
-        }else if(event.target.id === 'middle-image'){
+        } else if (event.target.id === 'middle-image') {
             Products.allImages[middleIndex].votes++;
 
-        }else if(event.target.id === 'right-image'){
+        } else if (event.target.id === 'right-image') {
             Products.allImages[rightIndex].votes++;
-        }else{
+        } else {
             alert('you should click on the images');
             counts--;
         }
-        
+
         render();
-        console.log(Products.allImages);
+        //console.log(Products.allImages);
 
-        }else {
-
-       
+    } else {
+        renderList();
+        chart()
         container.removeEventListener('click', handleClicking);
 
         //leftImageElement.removeEventListener('click', handelClicking);
         //middleImageElement.removeEventListener('click', handelClicking);
         //rightImageElement.removeEventListener('click', handelClicking);
     }
-}     
-     //  BUTTON
-    let button = document.getElementById('btn');
-    button.addEventListener('click', showingList);
+}
+//  BUTTON // y
+let button = document.getElementById('btn');
+button.addEventListener('click', showingList);
 
-    function showingList(){
-            renderList();
-            button.removeEventListener('click',showingList);
+function showingList(){
 
-        }
+button.removeEventListener('click',showingList);
 
-       
-    function renderList(){
-        let ul = document.getElementById('lists');
-        for(let i = 0 ; i < Products.allImages.length; i++) {
+}
+let arrayOfVotess = [];
+let arrayofshownTime = [];
+function renderList(){
+    let ul = document.getElementById('lists');
+    for (let i = 0; i < Products.allImages.length; i++) {
+        arrayOfVotess.push(Products.allImages[i].votes);
+        arrayofshownTime.push(Products.allImages[i].shownTime);
         let li = document.createElement('li');
         ul.appendChild(li);
-        li.textContent = `${Products.allImages[i].name} had ${Products.allImages[i].votes} Votes and it was seen for ${Products.allImages[i].shownTime } times`;
-     }
-  }
-    function genrateRandomIndex (){
-            return Math.floor(Math.random() * Products.allImages.length);
-        }
-//console.log(Products.allImages);
+        li.textContent = `${Products.allImages[i].name} had ${Products.allImages[i].votes} Votes and it was seen for ${Products.allImages[i].shownTime} times`;
+    }
+    console.log( arrayOfVotess);
+    console.log( arrayofshownTime);
+}
+function genrateRandomIndex(){
+    return Math.floor(Math.random() * Products.allImages.length);
+}
+//console.log(arrayOfVotes);
+//console.log(arrayOfVotes);
 //renderList();
 
-   let ctx = document.getElementById('myChart')
-   let myChart = new Chart(ctx, {
-       type: 'bar',
-       data: {
-           labels: [''],
-           datasets: [{
-               label: '# of Votes',
-               data: [''],
-               backgroundColor: [
-                   'rgba()',
-               ],
-               borderWidth: 1
+    function chart(){
+    var ctx = document.getElementById('myChart').getContext('2d');
+    let myChart = new Chart(ctx, { // instance
+        type: 'bar',
+        data: {
+            labels: arrayOfNames,
+            datasets: [{
+                label: 'Number of Votes',
+                data: arrayOfVotess,
+                backgroundColor: 
+                    'rgba(191, 63, 63, 0.7)',
+                
+                borderWidth: 1
+            }, {
+                label: 'Times of Shown',
+                data: arrayofshownTime,
+                backgroundColor: 
+                    'rgba(63, 191, 63, 0.7)',
+                    
+                    borderWidth: 1
 
-           }]
-           
-       }
+                }]
+
+            },
    });
+}
