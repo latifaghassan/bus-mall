@@ -12,7 +12,7 @@ body{
 h1{
     text-align: center;
     color: rgb(60, 96, 196);
-    font-family: 'Fredoka One', cursive; ;
+    font-family: 'Fredoka One', cursive; 
 
 }
 
@@ -35,4 +35,27 @@ img:hover{
 } 
 
 
+button {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(36, 39, 39);
+    color: rgb(207, 223, 223);
+    font-weight: bold;
+    font-size: 164%;
+    font-family: 'Fredoka One', cursive; 
+    position: relative;
+    left: 44%;
+}
 
+#lists {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #f2ffff;
+    margin-right: 76%;
+    color: rgb(20, 66, 66);
+    font-size: 95%;
+    font-family: 'Fredoka One', cursive;
+    position: relative;
+    left: 38%;
+    line-height: 133%;
+}
