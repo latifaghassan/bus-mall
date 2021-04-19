@@ -134,5 +134,23 @@ function handleClicking(event){
     function genrateRandomIndex (){
             return Math.floor(Math.random() * Products.allImages.length);
         }
-  //console.log(Products.allImages);
+//console.log(Products.allImages);
 //renderList();
+
+   let ctx = document.getElementById('myChart')
+   let myChart = new Chart(ctx, {
+       type: 'bar',
+       data: {
+           labels: [''],
+           datasets: [{
+               label: '# of Votes',
+               data: [''],
+               backgroundColor: [
+                   'rgba()',
+               ],
+               borderWidth: 1
+
+           }]
+           
+       }
+   });
