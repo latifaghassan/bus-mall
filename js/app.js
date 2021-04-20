@@ -52,22 +52,41 @@ new Products('usb', 'img/usb.gif');//[17]
 new Products('water-can', 'img/water-can.jpg');//[18]
 new Products('wine-glass', 'img/wine-glass.jpg');//[19]
 
+
+/************************LAB12******************************/
 //console.log(Products.allImages);
 //console.log(genrateRandomIndex());
 
 // for displaying the images
-function render() {
-    leftIndex = genrateRandomIndex();
-    middleIndex = genrateRandomIndex();
-    rightIndex = genrateRandomIndex();
+let previouslyShown = []; 
+function checking(idx, arr){
+    for(let i = 0 ; i <arr.length; i++){
+        if(idx === arr[i]){
+            return true
+        }
+      } return false;
+}
+function render(){
+        console.log('Before', previouslyShown);
+        leftIndex = genrateRandomIndex();
+        middleIndex = genrateRandomIndex();
+        rightIndex = genrateRandomIndex();
 
     // left === right OR left === middle OR right === middle
     // avoid repeated ones and make sure they differs.
-    while (leftIndex === rightIndex || leftIndex === middleIndex || middleIndex === rightIndex) {
+        while (leftIndex === rightIndex || leftIndex === middleIndex || middleIndex === rightIndex || previouslyShown.includes(leftIndex) || previouslyShown.includes(middleIndex) || checking(rightIndex,previouslyShown)){
         rightIndex = genrateRandomIndex();
         middleIndex = genrateRandomIndex();
+        leftIndex = genrateRandomIndex();
+    };
 
-    }
+    // 3 different values
+    // replace the values each time we run the function
+    previouslyShown = [leftIndex,middleIndex,rightIndex];
+    //console.log('After', previouslyShown)
+
+/************************LAB12******************************/
+
 
     leftImageElement.src = Products.allImages[leftIndex].source;
     Products.allImages[leftIndex].shownTime++;
@@ -118,7 +137,7 @@ function handleClicking(event) {
         //rightImageElement.removeEventListener('click', handelClicking);
     }
 }
-//  BUTTON // y
+//  BUTTON // 
 let button = document.getElementById('btn');
 button.addEventListener('click', showingList);
 
@@ -127,6 +146,8 @@ function showingList(){
 button.removeEventListener('click',showingList);
 
 }
+
+
 let arrayOfVotess = [];
 let arrayofshownTime = [];
 function renderList(){
@@ -147,6 +168,8 @@ function genrateRandomIndex(){
 //console.log(arrayOfVotes);
 //console.log(arrayOfVotes);
 //renderList();
+
+/************************LAB12******************************/
 
     function chart(){
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -174,3 +197,4 @@ function genrateRandomIndex(){
             },
    });
 }
+/************************LAB12******************************/
