@@ -66,6 +66,34 @@ function checking(idx, arr){
         }
       } return false;
 }
+
+/************************LAB13******************************/
+
+function saveDataToLs(){
+    //console.log(Products.allImages);
+    //console.log(JSON.stringify(Products.allImages));
+    let arrStr = JSON.stringify(Products.allImages);
+    localStorage.setItem('dataList', arrStr);
+    // JSON - javascript object notation
+}
+
+function gettingDataFromLs(){
+    // getting the item from the LS and it should have a key
+    let data = localStorage.getItem('dataList');
+    //console.log(data);
+    // converting from JSON Format to normal Arr of object
+    let item = JSON.parse(data);
+   // console.log(item);
+    if(item !== null){
+    Products.allImages = item;
+   // render();
+
+   }
+}
+/************************LAB13******************************/
+
+render();
+
 function render(){
         console.log('Before', previouslyShown);
         leftIndex = genrateRandomIndex();
@@ -96,7 +124,6 @@ function render(){
     Products.allImages[rightIndex].shownTime++;
 
 }
-render();
 
 
 //leftImageElement.addEventListener('click', handleClicking);
@@ -132,6 +159,10 @@ function handleClicking(event) {
         chart()
         container.removeEventListener('click', handleClicking);
 
+        //lab13
+        saveDataToLs();
+
+
         //leftImageElement.removeEventListener('click', handelClicking);
         //middleImageElement.removeEventListener('click', handelClicking);
         //rightImageElement.removeEventListener('click', handelClicking);
@@ -165,6 +196,8 @@ function renderList(){
 function genrateRandomIndex(){
     return Math.floor(Math.random() * Products.allImages.length);
 }
+
+
 //console.log(arrayOfVotes);
 //console.log(arrayOfVotes);
 //renderList();
@@ -198,3 +231,5 @@ function genrateRandomIndex(){
    });
 }
 /************************LAB12******************************/
+  //lab13
+  gettingDataFromLs();
